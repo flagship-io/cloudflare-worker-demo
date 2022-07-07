@@ -1,0 +1,10 @@
+name = "worker-cloudflare"
+main = "src/index.ts"
+compatibility_date = "2022-07-06"
+
+# Define top-level environment variables
+# under the `[vars]` block using
+# the `key = "value"` format
+[vars]
+API_KEY = ""
+ENV_ID = ""
