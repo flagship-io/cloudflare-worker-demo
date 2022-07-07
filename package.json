@@ -12,6 +12,7 @@
     "deploy": "wrangler publish"
   },
   "dependencies": {
-    "@flagship.io/js-sdk": "^3.0.9"
+    "@flagship.io/js-sdk": "^3.0.9",
+    "node-fetch": "2"
   }
 }
