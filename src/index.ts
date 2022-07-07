@@ -8,7 +8,7 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { Flagship, HitType } from "@flagship.io/js-sdk/dist/index.jamstack";
+import { Flagship, HitType } from "./flagship.bundle.js";
 
 import bucketingFile from "./bucketing.json";
 
