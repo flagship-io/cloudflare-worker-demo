@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - run: curl https://cdn.flagship.io/${{secrets.FLAGSHIP_ENV_ID}}/bucketing.json -o bucketing.json
+      - run: curl https://cdn.flagship.io/${{secrets.FLAGSHIP_ENV_ID}}/bucketing.json -o src/bucketing.json
 
       # Runs a single command using the runners shell
       - uses: actions/setup-node@v2
