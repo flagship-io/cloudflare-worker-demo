@@ -32,6 +32,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - name: Publish
-      - run: env CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}  yarn deploy
+        run: env CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}  yarn deploy
 
 
