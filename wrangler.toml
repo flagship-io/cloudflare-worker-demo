@@ -5,6 +5,13 @@ compatibility_date = "2022-07-06"
 # Define top-level environment variables
 # under the `[vars]` block using
 # the `key = "value"` format
+
 [vars]
-API_KEY = ""
-ENV_ID = ""
+# ...
+
+# ...
+
+# The necessary secrets are:
+# - ENV_ID
+# - API_KEY
+# Run `wrangler secret put <NAME> <VALUE>` for each of these

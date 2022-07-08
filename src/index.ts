@@ -25,6 +25,12 @@ export interface Env {
   ENV_ID: string;
 }
 
+const html = (flagValue: unknown) => `<!DOCTYPE html>
+<body>
+  <h1>Hello World</h1>
+  <p>This is my Cloudflare Worker using the flag <span style="color: red;">${flagValue}<span>.</p>
+</body>`;
+
 export default {
   async fetch(
     request: Request,
@@ -40,7 +46,7 @@ export default {
 
     const flag = visitor?.getFlag("js", "default-value");
 
-    const value = flag?.getValue();
+    const flagValue = flag?.getValue();
 
     await visitor.sendHit({
       type: HitType.PAGE,
@@ -49,6 +55,10 @@ export default {
 
     // await flag.userExposed();
 
-    return new Response("Hello World!" + value + "a");
+    return new Response(html(flagValue), {
+      headers: {
+        "content-type": "text/html;charset=UTF-8",
+      },
+    });
   },
 };

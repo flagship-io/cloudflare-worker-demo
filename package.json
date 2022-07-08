@@ -9,7 +9,9 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler publish"
+    "deploy": "wrangler publish",
+    "login": "wrangler login",
+    "wrangler": "wrangler"
   },
   "dependencies": {
     "@flagship.io/js-sdk": "^3.0.9",
