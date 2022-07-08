@@ -31,5 +31,8 @@ jobs:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install
-      - run: env CLOUDFLARE_API_TOKEN=${{secrets.CLOUDFLARE_API_TOKEN}} yarn deploy
+      - name: Publish
+        uses: cloudflare/wrangler-action@1.2.0
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
