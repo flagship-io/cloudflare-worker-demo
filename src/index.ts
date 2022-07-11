@@ -67,8 +67,11 @@ export default {
     });
     const { searchParams } = new URL(request.url);
 
+    const context = JSON.parse(searchParams.get("context") || "{}");
+
     const visitor = Flagship.newVisitor({
       visitorId: searchParams.get("visitorId"),
+      context,
     });
     await visitor?.fetchFlags();
 
