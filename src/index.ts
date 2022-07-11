@@ -8,13 +8,18 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
-import { Flagship, HitType } from "./flagship.bundle.js";
+import {
+  Flagship,
+  HitType,
+  IVisitorCacheImplementation,
+  VisitorCacheDTO,
+} from "./flagship.bundle";
 
 import bucketingFile from "./bucketing.json";
 
 export interface Env {
   // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-  // MY_KV_NAMESPACE: KVNamespace;
+  VISITOR_CACHE_KV: KVNamespace;
   //
   // Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
   // MY_DURABLE_OBJECT: DurableObjectNamespace;
@@ -25,10 +30,10 @@ export interface Env {
   ENV_ID: string;
 }
 
-const html = (flagValue: unknown) => `<!DOCTYPE html>
+const html = (flagValue: unknown, visitorId: string) => `<!DOCTYPE html>
 <body>
   <h1>Hello World</h1>
-  <p>This is my Cloudflare Worker using the flag <span style="color: red;">${flagValue}<span>.</p>
+  <p>This is my Cloudflare Worker using for the visitorID : <span style="color: red;">${visitorId}</span> the flag <span style="color: red;">${flagValue}</span>.</p>
 </body>`;
 
 export default {
@@ -37,11 +42,34 @@ export default {
     env: Env,
     ctx: ExecutionContext
   ): Promise<Response> {
+    console.log(env);
+
+    const visitorCacheImplementation: IVisitorCacheImplementation = {
+      cacheVisitor: async (
+        visitorId: string,
+        Data: VisitorCacheDTO
+      ): Promise<void> => {
+        await env.VISITOR_CACHE_KV.put(visitorId, JSON.stringify(Data));
+      },
+      lookupVisitor: async (visitorId: string): Promise<VisitorCacheDTO> => {
+        const caches = await env.VISITOR_CACHE_KV.get(visitorId);
+        return caches ? JSON.parse(caches) : caches;
+      },
+      flushVisitor: async (visitorId: string): Promise<void> => {
+        await env.VISITOR_CACHE_KV.delete(visitorId);
+      },
+    };
+
     Flagship.start(env.ENV_ID, env.API_KEY, {
+      visitorCacheImplementation,
       isCloudFlareClient: true,
       initialBucketing: bucketingFile,
     });
-    const visitor = Flagship.newVisitor();
+    const { searchParams } = new URL(request.url);
+
+    const visitor = Flagship.newVisitor({
+      visitorId: searchParams.get("visitorId"),
+    });
     await visitor?.fetchFlags();
 
     const flag = visitor?.getFlag("js", "default-value");
@@ -55,7 +83,7 @@ export default {
 
     // await flag.userExposed();
 
-    return new Response(html(flagValue), {
+    return new Response(html(flagValue, visitor.visitorId), {
       headers: {
         "content-type": "text/html;charset=UTF-8",
       },
