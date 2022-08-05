@@ -42,8 +42,6 @@ export default {
     env: Env,
     ctx: ExecutionContext
   ): Promise<Response> {
-    console.log(env);
-
     const visitorCacheImplementation: IVisitorCacheImplementation = {
       cacheVisitor: async (
         visitorId: string,
