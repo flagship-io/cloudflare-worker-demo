@@ -23,8 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - run: curl https://cdn.flagship.io/${{secrets.FLAGSHIP_ENV_ID}}/bucketing.json -o src/bucketing.json 
-
+  
       # Runs a single command using the runners shell
       - uses: actions/setup-node@v2
         with:
@@ -32,6 +31,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install
       - name: Publish
-        run: env CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }}  yarn deploy
+        run: env CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} CLOUDFLARE_ACCOUNT_ID=${{ secrets.CLOUDFLARE_ACCOUNT_ID }} FLAGSHIP_ENV_ID=${{secrets.FLAGSHIP_ENV_ID}} yarn deploy
 
 

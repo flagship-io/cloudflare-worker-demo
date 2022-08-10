@@ -9,7 +9,7 @@
   "private": true,
   "scripts": {
     "start": "wrangler dev",
-    "deploy": "wrangler publish",
+    "deploy": "./updateBucketingFile.sh && wrangler publish",
     "login": "wrangler login",
     "wrangler": "wrangler"
   },
