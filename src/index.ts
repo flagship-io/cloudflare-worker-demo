@@ -1,40 +1,32 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `wrangler dev src/index.ts` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `wrangler publish src/index.ts --name my-worker` to publish your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
-
 import {
+  DecisionMode,
   Flagship,
   HitType,
   IVisitorCacheImplementation,
   VisitorCacheDTO,
-} from "./flagship.bundle";
+} from "@flagship.io/js-sdk/dist/index.lite";
 
-import bucketingFile from "./bucketing.json";
+import cookie from "cookie";
+
+import bucketingData from "./bucketing.json";
 
 export interface Env {
-  // Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
   VISITOR_CACHE_KV: KVNamespace;
-  //
-  // Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
-  // MY_DURABLE_OBJECT: DurableObjectNamespace;
-  //
-  // Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
-  // MY_BUCKET: R2Bucket;
   API_KEY: string;
   ENV_ID: string;
 }
 
-const html = (flagValue: unknown, visitorId: string) => `<!DOCTYPE html>
+const html = (
+  flagValue: unknown,
+  visitorId: string,
+  region?: string
+) => `<!DOCTYPE html>
 <body>
-  <h1>Hello World</h1>
-  <p>This is my Cloudflare Worker using for the visitorID : <span style="color: red;">${visitorId}</span> the flag <span style="color: red;">${flagValue}</span>.</p>
+  <h1>Hello World from ${region}</h1>
+  <p>This is my Cloudflare Edge Worker using Flagship for the visitorID : <span style="color: red;">${visitorId}</span> <br/>  the flag <span style="color: red;">${flagValue}</span>.</p>
 </body>`;
+
+const FS_VISITOR_ID_COOKIE_NAME = "fs_visitor_id";
 
 export default {
   async fetch(
@@ -45,9 +37,9 @@ export default {
     const visitorCacheImplementation: IVisitorCacheImplementation = {
       cacheVisitor: async (
         visitorId: string,
-        Data: VisitorCacheDTO
+        data: VisitorCacheDTO
       ): Promise<void> => {
-        await env.VISITOR_CACHE_KV.put(visitorId, JSON.stringify(Data));
+        await env.VISITOR_CACHE_KV.put(visitorId, JSON.stringify(data));
       },
       lookupVisitor: async (visitorId: string): Promise<VisitorCacheDTO> => {
         const caches = await env.VISITOR_CACHE_KV.get(visitorId);
@@ -58,36 +50,47 @@ export default {
       },
     };
 
+    // Start the SDK
     Flagship.start(env.ENV_ID, env.API_KEY, {
+      decisionMode: DecisionMode.EDGE,
       visitorCacheImplementation,
-      isCloudFlareClient: true,
-      initialBucketing: bucketingFile,
+      initialBucketing: bucketingData, // Set bucketing data fetched from flagship CDN
     });
-    const { searchParams } = new URL(request.url);
 
-    const context = JSON.parse(searchParams.get("context") || "{}");
+    const cookies = cookie.parse(request.headers.get("Cookie") || "");
+
+    //Get visitor Id from cookies
+    const visitorId = cookies[FS_VISITOR_ID_COOKIE_NAME];
 
     const visitor = Flagship.newVisitor({
-      visitorId: searchParams.get("visitorId"),
-      context,
+      visitorId, // if no visitor id exists from the cookie, the SDK will generate one
     });
-    await visitor?.fetchFlags();
 
-    const flag = visitor?.getFlag("js", "default-value");
+    await visitor.fetchFlags();
 
-    const flagValue = flag?.getValue();
+    const flag = visitor.getFlag("my_flag_key", "default-value");
+
+    const flagValue = flag.getValue();
 
     await visitor.sendHit({
       type: HitType.PAGE,
       documentLocation: "page",
     });
 
-    // await flag.userExposed();
+    // close the SDK to batch and send all hits
+    ctx.waitUntil(Flagship.close());
 
-    return new Response(html(flagValue, visitor.visitorId), {
-      headers: {
-        "content-type": "text/html;charset=UTF-8",
-      },
-    });
+    return new Response(
+      html(flagValue, visitor.visitorId, request?.cf?.region),
+      {
+        headers: {
+          "content-type": "text/html;charset=UTF-8",
+          "Set-Cookie": cookie.serialize(
+            FS_VISITOR_ID_COOKIE_NAME,
+            visitor.visitorId
+          ),
+        },
+      }
+    );
   },
 };
