@@ -3,8 +3,14 @@ import {
   Flagship,
   HitType,
   IVisitorCacheImplementation,
+  LogLevel,
   VisitorCacheDTO,
 } from "@flagship.io/js-sdk/dist/index.lite";
+
+import {
+  getAssetFromKV,
+  mapRequestToAsset,
+} from "@cloudflare/kv-asset-handler";
 
 import cookie from "cookie";
 
@@ -14,6 +20,7 @@ export interface Env {
   VISITOR_CACHE_KV: KVNamespace;
   API_KEY: string;
   ENV_ID: string;
+  __STATIC_CONTENT: KVNamespace;
 }
 
 const html = (
@@ -27,6 +34,7 @@ const html = (
 </body>`;
 
 const FS_VISITOR_ID_COOKIE_NAME = "fs_visitor_id";
+const DEBUG = false;
 
 export default {
   async fetch(
@@ -49,13 +57,15 @@ export default {
         await env.VISITOR_CACHE_KV.delete(visitorId);
       },
     };
-
     // Start the SDK
     Flagship.start(env.ENV_ID, env.API_KEY, {
       decisionMode: DecisionMode.EDGE,
+      logLevel: LogLevel.NONE,
       visitorCacheImplementation,
       initialBucketing: bucketingData, // Set bucketing data fetched from flagship CDN
     });
+
+    console.log("env", env);
 
     const cookies = cookie.parse(request.headers.get("Cookie") || "");
 
@@ -78,19 +88,55 @@ export default {
     });
 
     // close the SDK to batch and send all hits
-    ctx.waitUntil(Flagship.close());
 
-    return new Response(
-      html(flagValue, visitor.visitorId, request?.cf?.region),
-      {
-        headers: {
-          "content-type": "text/html;charset=UTF-8",
-          "Set-Cookie": cookie.serialize(
-            FS_VISITOR_ID_COOKIE_NAME,
-            visitor.visitorId
-          ),
+    let options: Record<string, any> = {};
+    let response: Response = new Response();
+    try {
+      const page = await getAssetFromKV(
+        {
+          request,
+          waitUntil(promise) {
+            return ctx.waitUntil(promise);
+          },
         },
+        { ASSET_NAMESPACE: env.VISITOR_CACHE_KV }
+      );
+      // allow headers to be altered
+      response = new Response(page.body, page);
+      response.headers.set("content-type", "text/html;charset=UTF-8");
+      response.headers.set(
+        "Set-Cookie",
+        cookie.serialize(FS_VISITOR_ID_COOKIE_NAME, visitor.visitorId)
+      );
+    } catch (e: any) {
+      if (!DEBUG) {
+        try {
+          let notFoundResponse = await getAssetFromKV(
+            {
+              request,
+              waitUntil(promise) {
+                return ctx.waitUntil(promise);
+              },
+            },
+            {
+              ASSET_NAMESPACE: env.__STATIC_CONTENT,
+              mapRequestToAsset: (req) =>
+                new Request(`${new URL(req.url).origin}/404.html`, req),
+            }
+          );
+
+          return new Response(notFoundResponse.body, {
+            ...notFoundResponse,
+            status: 404,
+          });
+        } catch (e) {
+          console.log("e", e);
+        }
       }
-    );
+      return new Response(e.message || e.toString(), { status: 500 });
+    }
+
+    ctx.waitUntil(Flagship.close());
+    return response;
   },
 };

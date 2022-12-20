@@ -15,6 +15,7 @@
     "wrangler": "wrangler"
   },
   "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0",
     "@flagship.io/js-sdk": "^3.0.15",
     "cookie": "^0.5.0",
     "node-fetch": "2"

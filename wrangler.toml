@@ -1,5 +1,6 @@
 name = "worker-cloudflare"
 main = "src/index.ts"
+site = { bucket = "./public" }
 compatibility_date = "2022-07-06"
 
 # Define top-level environment variables
@@ -19,5 +20,4 @@ compatibility_date = "2022-07-06"
 # Run `wrangler secret put <NAME> <VALUE>` for each of these
 
  kv_namespaces =[{ binding = "VISITOR_CACHE_KV", preview_id = "af7b76ef658b4f6f8c17650494968518", id = "af03c42f07cc45b39d4f9be560499dbe" }]
-
 
