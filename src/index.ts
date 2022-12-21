@@ -10,11 +10,14 @@ import {
 import {
   getAssetFromKV,
   mapRequestToAsset,
+  serveSinglePageApp,
 } from "@cloudflare/kv-asset-handler";
 
 import cookie from "cookie";
 
 import bucketingData from "./bucketing.json";
+
+import stringTemplate from "string-template";
 
 export interface Env {
   VISITOR_CACHE_KV: KVNamespace;
@@ -23,120 +26,134 @@ export interface Env {
   __STATIC_CONTENT: KVNamespace;
 }
 
-const html = (
-  flagValue: unknown,
-  visitorId: string,
-  region?: string
-) => `<!DOCTYPE html>
-<body>
-  <h1>Hello World from ${region}</h1>
-  <p>This is my Cloudflare Edge Worker using Flagship for the visitorID : <span style="color: red;">${visitorId}</span> <br/>  the flag <span style="color: red;">${flagValue}</span>.</p>
-</body>`;
-
 const FS_VISITOR_ID_COOKIE_NAME = "fs_visitor_id";
 const DEBUG = false;
 
-export default {
-  async fetch(
-    request: Request,
-    env: Env,
-    ctx: ExecutionContext
-  ): Promise<Response> {
-    const visitorCacheImplementation: IVisitorCacheImplementation = {
-      cacheVisitor: async (
-        visitorId: string,
-        data: VisitorCacheDTO
-      ): Promise<void> => {
-        await env.VISITOR_CACHE_KV.put(visitorId, JSON.stringify(data));
-      },
-      lookupVisitor: async (visitorId: string): Promise<VisitorCacheDTO> => {
-        const caches = await env.VISITOR_CACHE_KV.get(visitorId);
-        return caches ? JSON.parse(caches) : caches;
-      },
-      flushVisitor: async (visitorId: string): Promise<void> => {
-        await env.VISITOR_CACHE_KV.delete(visitorId);
-      },
+addEventListener("fetch", (event) => {
+  event.respondWith(handleEvent(event));
+});
+
+async function UseFlagship(event: FetchEvent) {
+  const { request } = event;
+  const visitorCacheImplementation: IVisitorCacheImplementation = {
+    cacheVisitor: async (
+      visitorId: string,
+      data: VisitorCacheDTO
+    ): Promise<void> => {
+      await VISITOR_CACHE_KV.put(visitorId, JSON.stringify(data));
+    },
+    lookupVisitor: async (visitorId: string): Promise<VisitorCacheDTO> => {
+      const caches = await VISITOR_CACHE_KV.get(visitorId);
+      return caches ? JSON.parse(caches) : caches;
+    },
+    flushVisitor: async (visitorId: string): Promise<void> => {
+      await VISITOR_CACHE_KV.delete(visitorId);
+    },
+  };
+
+  let logs = "";
+
+  function onLog(level: number, tag: any, message: any) {
+    const now = new Date(Date.now());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const getTwoDigit = (value: any) => {
+      return value.toString().length === 1 ? `0${value}` : value;
     };
-    // Start the SDK
-    Flagship.start(env.ENV_ID, env.API_KEY, {
-      decisionMode: DecisionMode.EDGE,
-      logLevel: LogLevel.NONE,
-      visitorCacheImplementation,
-      initialBucketing: bucketingData, // Set bucketing data fetched from flagship CDN
-    });
 
-    console.log("env", env);
+    logs += `[${getTwoDigit(now.getFullYear())}-${getTwoDigit(
+      now.getMonth()
+    )}-${getTwoDigit(now.getDay())} ${getTwoDigit(
+      now.getHours()
+    )}:${getTwoDigit(now.getMinutes())}:${getTwoDigit(
+      now.getSeconds()
+    )}.${getTwoDigit(now.getMilliseconds())}] [${"Flagship SDK"}] [${
+      LogLevel[level]
+    }] [${tag}] : ${message} <br/>`;
+  }
 
-    const cookies = cookie.parse(request.headers.get("Cookie") || "");
+  // Start the SDK
+  Flagship.start(ENV_ID, API_KEY, {
+    decisionMode: DecisionMode.EDGE,
+    logLevel: LogLevel.INFO,
+    visitorCacheImplementation,
+    initialBucketing: bucketingData,
+    onLog,
+  });
 
-    //Get visitor Id from cookies
-    const visitorId = cookies[FS_VISITOR_ID_COOKIE_NAME];
+  const cookies = cookie.parse(request.headers.get("Cookie") || "");
 
-    const visitor = Flagship.newVisitor({
-      visitorId, // if no visitor id exists from the cookie, the SDK will generate one
-    });
+  //Get visitor Id from cookies
+  const visitorId = cookies[FS_VISITOR_ID_COOKIE_NAME];
 
-    await visitor.fetchFlags();
+  const visitor = Flagship.newVisitor({
+    visitorId, // if no visitor id exists from the cookie, the SDK will generate one
+  });
 
-    const flag = visitor.getFlag("my_flag_key", "default-value");
+  await visitor.fetchFlags();
 
-    const flagValue = flag.getValue();
+  const shopBtnVariant = visitor.getFlag("shopBtnVariant", "primary");
+  const showPromotion = visitor.getFlag("showPromotion", "hide");
 
-    await visitor.sendHit({
-      type: HitType.PAGE,
-      documentLocation: "page",
-    });
+  await visitor.sendHit({
+    type: HitType.PAGE,
+    documentLocation: "page",
+  });
 
-    // close the SDK to batch and send all hits
+  return {
+    shopBtnVariant: shopBtnVariant.getValue(),
+    showPromotion: showPromotion.getValue(),
+    visitorId: visitor.visitorId,
+    logs,
+  };
+}
 
-    let options: Record<string, any> = {};
-    let response: Response = new Response();
+async function handleEvent(event: FetchEvent) {
+  const { request } = event;
+
+  if (!request.headers.get("accept")?.includes("text/html")) {
     try {
-      const page = await getAssetFromKV(
-        {
-          request,
-          waitUntil(promise) {
-            return ctx.waitUntil(promise);
-          },
-        },
-        { ASSET_NAMESPACE: env.VISITOR_CACHE_KV }
-      );
-      // allow headers to be altered
-      response = new Response(page.body, page);
-      response.headers.set("content-type", "text/html;charset=UTF-8");
-      response.headers.set(
-        "Set-Cookie",
-        cookie.serialize(FS_VISITOR_ID_COOKIE_NAME, visitor.visitorId)
-      );
-    } catch (e: any) {
-      if (!DEBUG) {
-        try {
-          let notFoundResponse = await getAssetFromKV(
-            {
-              request,
-              waitUntil(promise) {
-                return ctx.waitUntil(promise);
-              },
-            },
-            {
-              ASSET_NAMESPACE: env.__STATIC_CONTENT,
-              mapRequestToAsset: (req) =>
-                new Request(`${new URL(req.url).origin}/404.html`, req),
-            }
-          );
-
-          return new Response(notFoundResponse.body, {
-            ...notFoundResponse,
-            status: 404,
-          });
-        } catch (e) {
-          console.log("e", e);
-        }
-      }
-      return new Response(e.message || e.toString(), { status: 500 });
+      return await getAssetFromKV(event);
+    } catch (e) {
+      let pathname = new URL(event.request.url).pathname;
+      return new Response(`"${pathname}" not found`, {
+        status: 404,
+        statusText: "not found",
+      });
     }
+  }
 
-    ctx.waitUntil(Flagship.close());
-    return response;
-  },
-};
+  try {
+    const { shopBtnVariant, showPromotion, visitorId, logs } =
+      await UseFlagship(event);
+    // Add logic to decide whether to serve an asset or run your original Worker code
+    const response = await getAssetFromKV(event);
+
+    const htmlContent = await response.text();
+
+    const cf = request.cf;
+    const htmlContentFormatted = stringTemplate(htmlContent, {
+      shopBtnVariant,
+      showPromotion,
+      colo: cf?.colo,
+      country: cf?.country,
+      city: cf?.city,
+      continent: cf?.continent,
+      logs,
+    });
+
+    const formattedResponse = new Response(htmlContentFormatted, response);
+    formattedResponse.headers.set(
+      "Set-Cookie",
+      cookie.serialize(FS_VISITOR_ID_COOKIE_NAME, visitorId)
+    );
+    event.waitUntil(Flagship.close());
+    return formattedResponse;
+  } catch (e) {
+    let pathname = new URL(event.request.url).pathname;
+    event.waitUntil(Flagship.close());
+    return new Response(`"${pathname}" not found`, {
+      status: 404,
+      statusText: "not found",
+    });
+  }
+}

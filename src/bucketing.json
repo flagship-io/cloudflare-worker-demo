@@ -1,84 +1,11 @@
 {
     "campaigns": [
         {
-            "id": "cbf6svh9m27g1fuoinsg",
-            "type": "ab",
+            "id": "cehgd0ffdki0pvap7440",
+            "type": "toggle",
             "variationGroups": [
                 {
-                    "id": "cbf6svh9m27g1fuointg",
-                    "targeting": {
-                        "targetingGroups": [
-                            {
-                                "targetings": [
-                                    {
-                                        "operator": "EQUALS",
-                                        "key": "testing_tracking_manager",
-                                        "value": true
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "variations": [
-                        {
-                            "id": "cbf6svh9m27g1fuoinu0",
-                            "modifications": {
-                                "type": "FLAG",
-                                "value": {
-                                    "my_flag": null
-                                }
-                            },
-                            "allocation": 25,
-                            "reference": true
-                        },
-                        {
-                            "id": "cbf6svh9m27g1fuoinug",
-                            "modifications": {
-                                "type": "TEXT",
-                                "value": {
-                                    "my_flag": "value1"
-                                }
-                            },
-                            "allocation": 25
-                        },
-                        {
-                            "id": "cbf6svh9m27g1fuoinv0",
-                            "modifications": {
-                                "type": "TEXT",
-                                "value": {
-                                    "my_flag": "value3"
-                                }
-                            },
-                            "allocation": 25
-                        },
-                        {
-                            "id": "cbf6svh9m27g1fuoinvg",
-                            "modifications": {
-                                "type": "TEXT",
-                                "value": {
-                                    "my_flag": "value2"
-                                }
-                            },
-                            "allocation": 25
-                        }
-                    ]
-                }
-            ],
-            "bucketRanges": [
-                {
-                    "r": [
-                        0,
-                        100
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "c7q1lmuru9u05agq3aog",
-            "type": "ab",
-            "variationGroups": [
-                {
-                    "id": "c7q1lmuru9u05agq3apg",
+                    "id": "cehgd0ffdki0pvap7450",
                     "targeting": {
                         "targetingGroups": [
                             {
@@ -94,49 +21,314 @@
                     },
                     "variations": [
                         {
-                            "id": "c7q1lmuru9u05agq3aq0",
+                            "id": "cehgd0ffdki0pvap745g",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "js": null,
-                                    "js-boolean": null
+                                    "showPromotion": "show"
                                 }
                             },
-                            "allocation": 25,
+                            "allocation": 100
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cehgb43k5li0o2m2ui10",
+            "type": "ab",
+            "variationGroups": [
+                {
+                    "id": "cehgb43k5li0o2m2ui20",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "fs_all_users",
+                                        "value": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "cehgb43k5li0o2m2ui2g",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "shopBtnVariant": null
+                                }
+                            },
+                            "allocation": 34,
                             "reference": true
                         },
                         {
-                            "id": "c7q1lmuru9u05agq3aqg",
+                            "id": "cehgb43k5li0o2m2ui30",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "js": "new-value1",
-                                    "js-boolean": false
+                                    "shopBtnVariant": "danger"
                                 }
                             },
-                            "allocation": 25
+                            "allocation": 33
                         },
                         {
-                            "id": "c7q1m8p172r00al7k2sg",
+                            "id": "cehgcgbanln0p0qqaou0",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "js": "new-value3",
-                                    "js-boolean": true
+                                    "shopBtnVariant": "success"
                                 }
                             },
-                            "allocation": 25
+                            "allocation": 33
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cecu03ot8ti0afg8mi60",
+            "slug": "js-app-qa",
+            "type": "ab",
+            "variationGroups": [
+                {
+                    "id": "cecu03ot8ti0afg8mi70",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "fs_all_users",
+                                        "value": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "cecu03ot8ti0afg8mi7g",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "my_flag_key": null
+                                }
+                            },
+                            "reference": true
                         },
                         {
-                            "id": "c7q1m8p172r04gs741og",
+                            "id": "cecu03ot8ti0afg8mi80",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "js": "new-value2",
-                                    "js-boolean": false
+                                    "my_flag_key": "value 1"
                                 }
                             },
-                            "allocation": 25
+                            "allocation": 40
+                        },
+                        {
+                            "id": "cecu03ot8ti0afg8mi8g",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "my_flag_key": "value 3"
+                                }
+                            },
+                            "allocation": 30
+                        },
+                        {
+                            "id": "cecu03ot8ti0afg8mi90",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "my_flag_key": "value 2"
+                                }
+                            },
+                            "allocation": 30
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ccblofa7bde07su6g5g0",
+            "type": "toggle",
+            "variationGroups": [
+                {
+                    "id": "ccblqvgsfm000s41jimg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "osName",
+                                        "value": [
+                                            "Android"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "ccblqvgsfm000s41jin0",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "feature_payment_applePay_enable": false,
+                                    "feature_payment_googlePay_enable": true
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                },
+                {
+                    "id": "ccbls0qbg1fg3blfn8vg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "osName",
+                                        "value": [
+                                            "iOS"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "ccbls0qbg1fg3blfn900",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "feature_payment_applePay_enable": true,
+                                    "feature_payment_googlePay_enable": false
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "ccblmka7bde07sr4cqpg",
+            "type": "toggle",
+            "variationGroups": [
+                {
+                    "id": "ccblmka7bde07sr4cqqg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "fs_all_users",
+                                        "value": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "ccblmka7bde07sr4cqr0",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "feature_payment_paypal_enable": true
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "cc71vulhk7601h4alq9g",
+            "type": "toggle",
+            "variationGroups": [
+                {
+                    "id": "cc71vulhk7601h4alqag",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "fs_all_users",
+                                        "value": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "cc71vulhk7601h4alqb0",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "payment_cta_disabled_color": "#F2F2F2",
+                                    "payment_cta_enabled_color": "#1FA140",
+                                    "payment_cta_prefix_text": "Pay",
+                                    "payment_header_color": "#ee5c64",
+                                    "payment_header_title_text": "Flagship demo"
+                                }
+                            },
+                            "allocation": 100
                         }
                     ]
                 }
@@ -151,7 +343,5 @@
             ]
         }
     ],
-    "accountSettings": {
-        "enabledXPC": true
-    }
+    "accountSettings": {}
 }
