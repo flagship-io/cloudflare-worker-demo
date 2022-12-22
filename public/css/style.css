@@ -759,3 +759,11 @@ a {
   .hide{
     display: none !important;
   }
+
+  .feature-toggle{
+    border: 1px solid #198754;
+  }
+
+  .feature-ab{
+    border: 1px solid #ffc107;
+  }

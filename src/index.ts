@@ -96,7 +96,7 @@ async function UseFlagship(event: FetchEvent) {
 
   await visitor.sendHit({
     type: HitType.PAGE,
-    documentLocation: "page",
+    documentLocation: request.url,
   });
 
   return {
