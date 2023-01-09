@@ -67,7 +67,7 @@ async function UseFlagship(event: FetchEvent) {
   // Start the SDK
   Flagship.start(ENV_ID, API_KEY, {
     decisionMode: DecisionMode.EDGE,
-    logLevel: LogLevel.INFO,
+    logLevel: LogLevel.ALL,
     visitorCacheImplementation,
     initialBucketing: bucketingData,
     onLog,
@@ -84,8 +84,15 @@ async function UseFlagship(event: FetchEvent) {
 
   await visitor.fetchFlags();
 
-  const shopBtnVariant = visitor.getFlag("shopBtnVariant", "primary");
-  const showPromotion = visitor.getFlag("showPromotion", "hide");
+  const shopBtnVariantOriginal = "primary";
+
+  const shopBtnVariant = visitor.getFlag(
+    "shopBtnVariant",
+    shopBtnVariantOriginal
+  );
+
+  const showPromotionOriginal = "hide";
+  const showPromotion = visitor.getFlag("showPromotion", showPromotionOriginal);
 
   await visitor.sendHit({
     type: HitType.PAGE,
@@ -93,6 +100,8 @@ async function UseFlagship(event: FetchEvent) {
   });
 
   return {
+    shopBtnVariantOriginal,
+    showPromotionOriginal,
     shopBtnVariant: shopBtnVariant.getValue(),
     showPromotion: showPromotion.getValue(),
     visitorId: visitor.visitorId,
@@ -116,8 +125,14 @@ async function handleEvent(event: FetchEvent) {
   }
 
   try {
-    const { shopBtnVariant, showPromotion, visitorId, logs } =
-      await UseFlagship(event);
+    const {
+      shopBtnVariant,
+      showPromotion,
+      visitorId,
+      logs,
+      shopBtnVariantOriginal,
+      showPromotionOriginal,
+    } = await UseFlagship(event);
     // Add logic to decide whether to serve an asset or run your original Worker code
     const response = await getAssetFromKV(event);
 
@@ -132,6 +147,8 @@ async function handleEvent(event: FetchEvent) {
       city: cf?.city,
       continent: cf?.continent,
       logs,
+      shopBtnVariantOriginal,
+      showPromotionOriginal,
     });
 
     const formattedResponse = new Response(htmlContentFormatted, response);

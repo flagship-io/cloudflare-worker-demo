@@ -30,6 +30,8 @@ jQuery(document).ready(function ($) {
 
 	"use strict";
 
+	$('[data-bs-toggle="tooltip"]').tooltip()
+
 	const fsVisitorIdCookie = getCookie(FS_VISITOR_ID_COOKIE_NAME)
 	$("#fs_visitor_id").val(fsVisitorIdCookie)
 
