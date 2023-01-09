@@ -19,13 +19,6 @@ import bucketingData from "./bucketing.json";
 
 import stringTemplate from "string-template";
 
-export interface Env {
-  VISITOR_CACHE_KV: KVNamespace;
-  API_KEY: string;
-  ENV_ID: string;
-  __STATIC_CONTENT: KVNamespace;
-}
-
 const FS_VISITOR_ID_COOKIE_NAME = "fs_visitor_id";
 const DEBUG = false;
 

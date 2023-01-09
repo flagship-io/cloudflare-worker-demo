@@ -1,53 +1,11 @@
 {
     "campaigns": [
         {
-            "id": "cehgd0ffdki0pvap7440",
-            "type": "toggle",
-            "variationGroups": [
-                {
-                    "id": "cehgd0ffdki0pvap7450",
-                    "targeting": {
-                        "targetingGroups": [
-                            {
-                                "targetings": [
-                                    {
-                                        "operator": "EQUALS",
-                                        "key": "fs_all_users",
-                                        "value": ""
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    "variations": [
-                        {
-                            "id": "cehgd0ffdki0pvap745g",
-                            "modifications": {
-                                "type": "FLAG",
-                                "value": {
-                                    "showPromotion": "show"
-                                }
-                            },
-                            "allocation": 100
-                        }
-                    ]
-                }
-            ],
-            "bucketRanges": [
-                {
-                    "r": [
-                        0,
-                        100
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "cehgb43k5li0o2m2ui10",
+            "id": "cenh94etakug0tq0nhhg",
             "type": "ab",
             "variationGroups": [
                 {
-                    "id": "cehgb43k5li0o2m2ui20",
+                    "id": "cenh94etakug0tq0nhig",
                     "targeting": {
                         "targetingGroups": [
                             {
@@ -63,7 +21,7 @@
                     },
                     "variations": [
                         {
-                            "id": "cehgb43k5li0o2m2ui2g",
+                            "id": "cenh94etakug0tq0nhj0",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
@@ -74,7 +32,7 @@
                             "reference": true
                         },
                         {
-                            "id": "cehgb43k5li0o2m2ui30",
+                            "id": "cenh94etakug0tq0nhjg",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
@@ -84,7 +42,7 @@
                             "allocation": 33
                         },
                         {
-                            "id": "cehgcgbanln0p0qqaou0",
+                            "id": "cenh94etakug0tq0nhk0",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
@@ -106,12 +64,11 @@
             ]
         },
         {
-            "id": "cecu03ot8ti0afg8mi60",
-            "slug": "js-app-qa",
-            "type": "ab",
+            "id": "cenh93hvbun2mj2cqiv0",
+            "type": "toggle",
             "variationGroups": [
                 {
-                    "id": "cecu03ot8ti0afg8mi70",
+                    "id": "cenh93hvbun2mj2cqj00",
                     "targeting": {
                         "targetingGroups": [
                             {
@@ -127,44 +84,14 @@
                     },
                     "variations": [
                         {
-                            "id": "cecu03ot8ti0afg8mi7g",
+                            "id": "cenh93hvbun2mj2cqj0g",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "my_flag_key": null
+                                    "showPromotion": "show"
                                 }
                             },
-                            "reference": true
-                        },
-                        {
-                            "id": "cecu03ot8ti0afg8mi80",
-                            "modifications": {
-                                "type": "FLAG",
-                                "value": {
-                                    "my_flag_key": "value 1"
-                                }
-                            },
-                            "allocation": 40
-                        },
-                        {
-                            "id": "cecu03ot8ti0afg8mi8g",
-                            "modifications": {
-                                "type": "FLAG",
-                                "value": {
-                                    "my_flag_key": "value 3"
-                                }
-                            },
-                            "allocation": 30
-                        },
-                        {
-                            "id": "cecu03ot8ti0afg8mi90",
-                            "modifications": {
-                                "type": "FLAG",
-                                "value": {
-                                    "my_flag_key": "value 2"
-                                }
-                            },
-                            "allocation": 30
+                            "allocation": 100
                         }
                     ]
                 }
@@ -179,21 +106,19 @@
             ]
         },
         {
-            "id": "ccblofa7bde07su6g5g0",
-            "type": "toggle",
+            "id": "bvdi6k1gsm51ej2vsa3g",
+            "type": "ab",
             "variationGroups": [
                 {
-                    "id": "ccblqvgsfm000s41jimg",
+                    "id": "bvdi6k1gsm51ej2vsa4g",
                     "targeting": {
                         "targetingGroups": [
                             {
                                 "targetings": [
                                     {
                                         "operator": "EQUALS",
-                                        "key": "osName",
-                                        "value": [
-                                            "Android"
-                                        ]
+                                        "key": "fs_all_users",
+                                        "value": ""
                                     }
                                 ]
                             }
@@ -201,12 +126,194 @@
                     },
                     "variations": [
                         {
-                            "id": "ccblqvgsfm000s41jin0",
+                            "id": "bvdi6k1gsm51ej2vsa50",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "color": "original"
+                                }
+                            },
+                            "allocation": 50,
+                            "reference": true
+                        },
+                        {
+                            "id": "bvdi6k1gsm51ej2vsa5g",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "color": "variation"
+                                }
+                            },
+                            "allocation": 50
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bsueacc57ha01a0bkoeg",
+            "type": "ab",
+            "variationGroups": [
+                {
+                    "id": "bsueacc57ha01a0bkofg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "GREATER_THAN",
+                                        "key": "login_cnt",
+                                        "value": 2
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bsueacc57ha01a0bkog0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "background_img": null,
+                                    "modal": null,
+                                    "modal_color": null,
+                                    "modal_text": null,
+                                    "modal_text_color": null,
+                                    "modal_text_cta": null
+                                }
+                            },
+                            "allocation": 34,
+                            "reference": true
+                        },
+                        {
+                            "id": "bsueacc57ha01a0bkogg",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "background_img": "https://go.forrester.com/wp-content/uploads/2020/01/Forrester_black.png",
+                                    "modal": true,
+                                    "modal_color": "#FFFFFF",
+                                    "modal_text": "We are so happy that you've downloaded this Mobile App, we are going to offer a buy one - get one free on your first purchase",
+                                    "modal_text_color": "#000000",
+                                    "modal_text_cta": "Get your discount"
+                                }
+                            },
+                            "allocation": 33
+                        },
+                        {
+                            "id": "bsuhsp9b7nr01ndihv4g",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "background_img": "https://go.forrester.com/wp-content/uploads/2020/01/Forrester_black.png",
+                                    "modal": true,
+                                    "modal_color": "#343434",
+                                    "modal_text": "We all know what you are here dude. Take that 10% discount and spread the word!",
+                                    "modal_text_color": "#DE436F",
+                                    "modal_text_cta": "Spread the word"
+                                }
+                            },
+                            "allocation": 33
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bqjhqt6irtfg0crutpa0",
+            "type": "flag",
+            "variationGroups": [
+                {
+                    "id": "bqjhqt6irtfg0crutpb0",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "isBetaUser",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bqjhqt6irtfg0crutpbg",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "feature_payment_applePay_enable": false,
-                                    "feature_payment_googlePay_enable": true
+                                    "wishlist": true
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bqjdnud4litg0ligcjsg",
+            "type": "perso",
+            "variationGroups": [
+                {
+                    "id": "bqjdnud4litg0ligcjtg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "menu_order",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bqjdnud4litg0ligcju0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "menuOrder": null
+                                }
+                            },
+                            "reference": true
+                        },
+                        {
+                            "id": "bqjdnud4litg0ligcjug",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "menuOrder": "home,about,shop,catalog,new arrivals,contact"
                                 }
                             },
                             "allocation": 100
@@ -214,17 +321,15 @@
                     ]
                 },
                 {
-                    "id": "ccbls0qbg1fg3blfn8vg",
+                    "id": "bqjdr9p0mtj01inls110",
                     "targeting": {
                         "targetingGroups": [
                             {
                                 "targetings": [
                                     {
                                         "operator": "EQUALS",
-                                        "key": "osName",
-                                        "value": [
-                                            "iOS"
-                                        ]
+                                        "key": "menu_order",
+                                        "value": true
                                     }
                                 ]
                             }
@@ -232,12 +337,21 @@
                     },
                     "variations": [
                         {
-                            "id": "ccbls0qbg1fg3blfn900",
+                            "id": "bqjdr9p0mtj01inls11g",
                             "modifications": {
-                                "type": "FLAG",
+                                "type": "JSON",
                                 "value": {
-                                    "feature_payment_applePay_enable": true,
-                                    "feature_payment_googlePay_enable": false
+                                    "menuOrder": null
+                                }
+                            },
+                            "reference": true
+                        },
+                        {
+                            "id": "bqjdr9p0mtj01inls120",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "menuOrder": "home,catalog,new arrivals,shop,about,contact"
                                 }
                             },
                             "allocation": 100
@@ -255,19 +369,19 @@
             ]
         },
         {
-            "id": "ccblmka7bde07sr4cqpg",
-            "type": "toggle",
+            "id": "bpjpppas3go0201v9obg",
+            "type": "ab",
             "variationGroups": [
                 {
-                    "id": "ccblmka7bde07sr4cqqg",
+                    "id": "bpjpppas3go0201v9ocg",
                     "targeting": {
                         "targetingGroups": [
                             {
                                 "targetings": [
                                     {
-                                        "operator": "EQUALS",
-                                        "key": "fs_all_users",
-                                        "value": ""
+                                        "operator": "GREATER_THAN",
+                                        "key": "daysSinceLastLaunch",
+                                        "value": 5
                                     }
                                 ]
                             }
@@ -275,11 +389,192 @@
                     },
                     "variations": [
                         {
-                            "id": "ccblmka7bde07sr4cqr0",
+                            "id": "bpjpppas3go0201v9od0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": null,
+                                    "titleSize": null
+                                }
+                            },
+                            "reference": true
+                        },
+                        {
+                            "id": "bpjpppas3go0201v9odg",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Welcome back",
+                                    "titleSize": 36
+                                }
+                            },
+                            "allocation": 50
+                        },
+                        {
+                            "id": "bpjpppas3go0201v9oe0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Glad to see you again",
+                                    "titleSize": 28
+                                }
+                            },
+                            "allocation": 50
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bpjppn5vds8054u5dpm0",
+            "type": "ab",
+            "variationGroups": [
+                {
+                    "id": "bpjppn5vds8054u5dpn0",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "LOWER_THAN_OR_EQUALS",
+                                        "key": "daysSinceLastLaunch",
+                                        "value": 5
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpjppn5vds8054u5dpng",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": null,
+                                    "visitorIdColor": null
+                                }
+                            },
+                            "allocation": 20,
+                            "reference": true
+                        },
+                        {
+                            "id": "bpjppn5vds8054u5dpo0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Ahoy",
+                                    "visitorIdColor": "#028C9A"
+                                }
+                            },
+                            "allocation": 20
+                        },
+                        {
+                            "id": "bpjppn5vds8054u5dpog",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Hi",
+                                    "visitorIdColor": "#00C2AD"
+                                }
+                            },
+                            "allocation": 20
+                        },
+                        {
+                            "id": "bpjppn5vds8054u5dpp0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Hey",
+                                    "visitorIdColor": "#7300C2"
+                                }
+                            },
+                            "allocation": 20
+                        },
+                        {
+                            "id": "bpjppn5vds8054u5dppg",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "title": "Hello",
+                                    "visitorIdColor": "#E5B21D"
+                                }
+                            },
+                            "allocation": 20
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bpjppklvds8053knn3ag",
+            "type": "toggle",
+            "variationGroups": [
+                {
+                    "id": "bpjppklvds8053knn3bg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "isVIPUser",
+                                        "value": true
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpjppklvds8053knn3c0",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "feature_payment_paypal_enable": true
+                                    "featureEnabled": true
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                },
+                {
+                    "id": "bpjppklvds8053knn3cg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "isVIPUser",
+                                        "value": false
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpjppklvds8053knn3d0",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "featureEnabled": false
                                 }
                             },
                             "allocation": 100
@@ -297,11 +592,11 @@
             ]
         },
         {
-            "id": "cc71vulhk7601h4alq9g",
-            "type": "toggle",
+            "id": "bpjpphis3go020kmh27g",
+            "type": "perso",
             "variationGroups": [
                 {
-                    "id": "cc71vulhk7601h4alqag",
+                    "id": "bpjpphis3go020kmh28g",
                     "targeting": {
                         "targetingGroups": [
                             {
@@ -317,15 +612,237 @@
                     },
                     "variations": [
                         {
-                            "id": "cc71vulhk7601h4alqb0",
+                            "id": "bpjpphis3go020kmh290",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "my_image": null
+                                }
+                            },
+                            "allocation": 5,
+                            "reference": true
+                        },
+                        {
+                            "id": "bpjpphis3go020kmh29g",
+                            "modifications": {
+                                "type": "IMAGE",
+                                "value": {
+                                    "my_image": "https://sdk.abtasty.com/android/assets/logo.png"
+                                }
+                            },
+                            "allocation": 95
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bpj0vobuhrlg0j0cck20",
+            "type": "toggle",
+            "variationGroups": [
+                {
+                    "id": "bpj0vobuhrlg0j0cck30",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "CONTAINS",
+                                        "key": "fs_users",
+                                        "value": "topchef"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpj0vobuhrlg0j0cck3g",
                             "modifications": {
                                 "type": "FLAG",
                                 "value": {
-                                    "payment_cta_disabled_color": "#F2F2F2",
-                                    "payment_cta_enabled_color": "#1FA140",
-                                    "payment_cta_prefix_text": "Pay",
-                                    "payment_header_color": "#ee5c64",
-                                    "payment_header_title_text": "Flagship demo"
+                                    "btn-disabled": true
+                                }
+                            },
+                            "allocation": 100
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bpj0vllvds800h1tvd90",
+            "type": "perso",
+            "variationGroups": [
+                {
+                    "id": "bpj0vllvds800h1tvda0",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "fs_all_users",
+                                        "value": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpj0vllvds800h1tvdag",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "char-counter": null
+                                }
+                            },
+                            "allocation": 5,
+                            "reference": true
+                        },
+                        {
+                            "id": "bpj0vllvds800h1tvdb0",
+                            "modifications": {
+                                "type": "JSON",
+                                "value": {
+                                    "char-counter": 20
+                                }
+                            },
+                            "allocation": 95
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "bpj0vhjuhrlg0j5bsfcg",
+            "type": "ab",
+            "variationGroups": [
+                {
+                    "id": "bpj0vhjuhrlg0j5bsfdg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "sdk_osName",
+                                        "value": "android"
+                                    },
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "string_var",
+                                        "value": "coucou"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "bpj0vhjuhrlg0j5bsfe0",
+                            "modifications": {
+                                "type": "TEXT",
+                                "value": {
+                                    "btn-color": "#FF0000"
+                                }
+                            },
+                            "allocation": 34,
+                            "reference": true
+                        },
+                        {
+                            "id": "bpj0vhjuhrlg0j5bsfeg",
+                            "modifications": {
+                                "type": "TEXT",
+                                "value": {
+                                    "btn-color": "#00FF00"
+                                }
+                            },
+                            "allocation": 33
+                        },
+                        {
+                            "id": "bpj0vhjuhrlg0j5bsff0",
+                            "modifications": {
+                                "type": "TEXT",
+                                "value": {
+                                    "btn-color": "#0000FF"
+                                }
+                            },
+                            "allocation": 33
+                        }
+                    ]
+                }
+            ],
+            "bucketRanges": [
+                {
+                    "r": [
+                        0,
+                        100
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "blj9j2igdv6g06oea2fg",
+            "slug": "scope_communication",
+            "type": "flag",
+            "variationGroups": [
+                {
+                    "id": "blj9j2igdv6g06oea2gg",
+                    "targeting": {
+                        "targetingGroups": [
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "accountId",
+                                        "value": 36748
+                                    }
+                                ]
+                            },
+                            {
+                                "targetings": [
+                                    {
+                                        "operator": "EQUALS",
+                                        "key": "accountId",
+                                        "value": 37975555555
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "variations": [
+                        {
+                            "id": "blj9j2igdv6g06oea2h0",
+                            "modifications": {
+                                "type": "FLAG",
+                                "value": {
+                                    "scopeCom": true
                                 }
                             },
                             "allocation": 100
@@ -343,5 +860,7 @@
             ]
         }
     ],
-    "accountSettings": {}
+    "accountSettings": {
+        "enabledXPC": true
+    }
 }
