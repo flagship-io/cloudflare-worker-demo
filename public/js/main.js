@@ -30,6 +30,11 @@ jQuery(document).ready(function ($) {
 
 	"use strict";
 
+	const time = performance.timing;
+	const pageloadtime = time.responseEnd - time.requestStart;
+
+	$("#pageLoadId").text(pageloadtime)
+
 	$('[data-bs-toggle="tooltip"]').tooltip()
 
 	const fsVisitorIdCookie = getCookie(FS_VISITOR_ID_COOKIE_NAME)

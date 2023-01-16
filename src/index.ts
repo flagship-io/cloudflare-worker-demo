@@ -110,6 +110,7 @@ async function UseFlagship(event: FetchEvent) {
 }
 
 async function handleEvent(event: FetchEvent) {
+  const now = Date.now();
   const { request } = event;
 
   if (!request.headers.get("accept")?.includes("text/html")) {
@@ -149,6 +150,7 @@ async function handleEvent(event: FetchEvent) {
       logs,
       shopBtnVariantOriginal,
       showPromotionOriginal,
+      runDuration: Date.now() - now,
     });
 
     const formattedResponse = new Response(htmlContentFormatted, response);
