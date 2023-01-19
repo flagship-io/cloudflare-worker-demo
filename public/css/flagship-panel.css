@@ -1,0 +1,82 @@
+/*
+ * Custom code goes here.
+ * A template should always ship with an empty custom.css
+ */
+
+#fs-sidemenu {
+  position: fixed;
+  z-index: 2000;
+  left: -420px;
+  top: 0;
+  bottom: 0;
+  width: 420px;
+  overflow: visible;
+  transition: 1s ease left;
+  padding: 20px;
+  background-color: #272727;
+  color: #fff !important;
+}
+
+#fs-sidemenu > .inner {
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+#fs-sidemenu #fs-sidemenu-open {
+  transform: rotate(90deg);
+  width: 80px;
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  margin-top: -40px;
+  background-color: #272727;
+  -webkit-appearance: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+#fs-sidemenu.opened {
+  display: block;
+  left: 0;
+  transition: 1s ease left;
+}
+
+#fs-sidemenu .fs-sidemenu-form label {
+  color: #fff !important;
+}
+
+#fs-sidemenu .fs-sidemenu-form .form-input {
+  margin-bottom: 5px;
+}
+
+#fs-sidemenu .fs-sidemenu-form > button {
+  background-color: rgb(147, 33, 84);
+  background-image: linear-gradient(to right, #d01c6c, #ff6842);
+  -webkit-appearance: none;
+  border: none;
+  color: #fff;
+  padding: 10px;
+}
+
+
+#fs-sidemenu .fs-sidemenu-form input {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  margin: 0;
+  color: #fff;
+  display: block;
+  padding: 6px 5px;
+  background: none;
+}
+
+#fs-sidemenu .fs-context-var {
+  margin-top: 10px;
+}
+
+#fs-sidemenu .fs-context-var > div {
+  margin-top: 5px;
+}
+
+

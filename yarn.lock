@@ -4,7 +4,7 @@
 
 "@babel/runtime@^7.18.9":
   version "7.20.1"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.20.1.tgz#1148bb33ab252b165a06698fde7576092a78b4a9"
+  resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.20.1.tgz"
   integrity sha512-mrzLkl6U9YLF8qpqI7TB82PESyEGjm/0Ly91jG575eVxMMlb8fYfOXFZIJ8XfLrJZQbm7dlKry2bJmXBUEkdFg==
   dependencies:
     regenerator-runtime "^0.13.10"
@@ -13,6 +13,13 @@
   version "0.2.0"
   resolved "https://registry.npmjs.org/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.2.0.tgz"
   integrity sha512-MVbXLbTcAotOPUj0pAMhVtJ+3/kFkwJqc5qNOleOZTv6QkZZABDMS21dSrSlVswEHwrpWC03e4fWytjqKvuE2A==
+  dependencies:
+    mime "^3.0.0"
+
+"@cloudflare/kv-asset-handler@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/@cloudflare/kv-asset-handler/-/kv-asset-handler-0.3.0.tgz"
+  integrity sha512-9CB/MKf/wdvbfkUdfrj+OkEwZ5b7rws0eogJ4293h+7b6KX5toPwym+VQKmILafNB9YiehqY0DlNrDcDhdWHSQ==
   dependencies:
     mime "^3.0.0"
 
@@ -34,10 +41,10 @@
     escape-string-regexp "^4.0.0"
     rollup-plugin-node-polyfills "^0.2.1"
 
-"@flagship.io/js-sdk@^3.0.15":
-  version "3.0.15"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.15.tgz#ee545ccf5d5e6f7e931bb978041d13e07e0e9df6"
-  integrity sha512-xkTvlg5FdTa+57RDoUYodw3QoqZy/aKNkMByUR+UETa6CBg0YlSbot6DYuhfU2DyhCosp4y4sivy6P3QnAoIAQ==
+"@flagship.io/js-sdk@^3.1.1-alpha.0":
+  version "3.1.1-alpha.0"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.1.1-alpha.0.tgz#2086c4c04d0231e3d7d6beef080d5414669870ad"
+  integrity sha512-LLDSJ44Z4Lsw6iQkMWJ4eZ54I2IgDX1SoH1KJGUxvkwNv5RkvYdIqFLe08LBhv1Dd6531mEmBpton49+o0ufUw==
   dependencies:
     "@babel/runtime" "^7.18.9"
     abort-controller "^3.0.0"
@@ -192,13 +199,18 @@
 
 "@types/cookie@^0.5.1":
   version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.5.1.tgz#b29aa1f91a59f35e29ff8f7cb24faf1a3a750554"
+  resolved "https://registry.npmjs.org/@types/cookie/-/cookie-0.5.1.tgz"
   integrity sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==
 
 "@types/stack-trace@0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/stack-trace/-/stack-trace-0.0.29.tgz"
   integrity sha512-TgfOX+mGY/NyNxJLIbDWrO9DjGoVSW9+aB8H2yy1fy32jsvxijhmyJI9fDFgvz3YP4lvJaq9DzdR/M1bOgVc9g==
+
+"@types/string-template@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@types/string-template/-/string-template-1.0.2.tgz"
+  integrity sha512-7VFuFekVzbr0uktqfBmsJc/CqjwnXWWOc5mHn7rajxzhLO9aM9nMMhtpa+90UK1GW6C0ctQF/9Fh0qJBwjqNXg==
 
 abort-controller@^3.0.0:
   version "3.0.0"
@@ -231,12 +243,12 @@ cookie@^0.4.1:
 
 cookie@^0.5.0:
   version "0.5.0"
-  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
+  resolved "https://registry.npmjs.org/cookie/-/cookie-0.5.0.tgz"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
 
 core-js@^3.24.1:
   version "3.26.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.26.1.tgz#7a9816dabd9ee846c1c0fe0e8fcad68f3709134e"
+  resolved "https://registry.npmjs.org/core-js/-/core-js-3.26.1.tgz"
   integrity sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==
 
 cron-schedule@^3.0.4:
@@ -397,7 +409,7 @@ events@^3.3.0:
 
 follow-redirects@^1.15.1:
   version "1.15.2"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
+  resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.2.tgz"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
 
 fsevents@~2.3.2:
@@ -490,7 +502,7 @@ path-to-regexp@^6.2.0:
 
 regenerator-runtime@^0.13.10:
   version "0.13.11"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
+  resolved "https://registry.npmjs.org/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
 
 rollup-plugin-inject@^3.0.0:
@@ -561,6 +573,11 @@ streamsearch@^1.1.0:
   resolved "https://registry.npmjs.org/streamsearch/-/streamsearch-1.1.0.tgz"
   integrity sha512-Mcc5wHehp9aXz1ax6bZUyY5afg9u2rv5cqQI3mRrYkGC8rW2hM02jWuwjtL++LS5qinSyhj2QfLyNsuc+VsExg==
 
+string-template@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/string-template/-/string-template-1.0.0.tgz"
+  integrity sha512-SLqR3GBUXuoPP5MmYtD7ompvXiG87QjT6lzOszyXjTM86Uu7At7vNnt2xgyTLq5o9T4IxTYFyGxcULqpsmsfdg==
+
 tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
@@ -596,7 +613,7 @@ whatwg-url@^5.0.0:
 
 wrangler@2.0.16:
   version "2.0.16"
-  resolved "https://registry.yarnpkg.com/wrangler/-/wrangler-2.0.16.tgz#b9aff8682544ae0907567699ef49554e3597368d"
+  resolved "https://registry.npmjs.org/wrangler/-/wrangler-2.0.16.tgz"
   integrity sha512-Fx3DCbQcYpnmUfRvCt4e7nxT0s6WVtIgjdBljvqOX6M/Cd1nJae8VpDtYG1XHtMjIkakRqmdtLCFds9a5usZGQ==
   dependencies:
     "@cloudflare/kv-asset-handler" "^0.2.0"
