@@ -66,7 +66,7 @@ async function UseFlagship(event: FetchEvent) {
 
   // Start the SDK
   Flagship.start(ENV_ID, API_KEY, {
-    decisionMode: DecisionMode.EDGE,
+    decisionMode: DecisionMode.BUCKETING_EDGE,
     logLevel: LogLevel.ALL,
     visitorCacheImplementation,
     initialBucketing: bucketingData,
